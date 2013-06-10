@@ -20,13 +20,36 @@
 # definition file).
 #
 
+
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
 
-# inherit from common msm8960
--include device/samsung/msm8960-common/BoardConfigCommon.mk
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/gogh-common/include
+
+BOARD_VENDOR := samsung
+
+# Platform
+TARGET_BOARD_PLATFORM := msm8960
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+
+# inherit from qcom-common
+-include device/samsung/qcom-common/BoardConfigCommon.mk
+
+# Architecture
+TARGET_CPU_SMP := true
+
+# Flags
+COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
+
+# Krait optimizations
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
+TARGET_USE_KRAIT_PLD_SET := true
+TARGET_KRAIT_BIONIC_PLDOFFS := 10
+TARGET_KRAIT_BIONIC_PLDTHRESH := 10
+TARGET_KRAIT_BIONIC_BBTHRESH := 64
+TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
 # Kernel
 TARGET_KERNEL_SOURCE        := kernel/samsung/goghvmu
@@ -40,6 +63,42 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 # Compatibilty with ICS drivers
 COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB 
 BOARD_LEGACY_NL80211_STA_EVENTS := true
+
+# Wifi related defines
+
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+
+# NFC
+BOARD_HAVE_NFC := true
+
+# QCOM hardware
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+
+# GPS
+#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8960
+
+# Vold
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 28
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+
+# Camera
+COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
+BOARD_CAMERA_USE_MM_HEAP := true
+
+# Workaround to avoid issues with legacy liblights on QCOM platforms
+TARGET_PROVIDES_LIBLIGHTS := true
+
+# Audio
+BOARD_USES_ALSA_AUDIO := true
+BOARD_HAVE_SAMSUNG_AUDIO := true
+
+# Workaround for missing symbols in camera
+BOARD_NEEDS_MEMORYHEAPPMEM := true
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/gogh-common/recovery/recovery_keys.c
@@ -69,5 +128,5 @@ TARGET_NO_INITLOGO := true
 BOARD_HAVE_AUDIENCE_A2220 := true
 
 # Use USB Dock Audio
-BOARD_HAVE_DOCK_USBAUDIO := true
+#BOARD_HAVE_DOCK_USBAUDIO := true
 
