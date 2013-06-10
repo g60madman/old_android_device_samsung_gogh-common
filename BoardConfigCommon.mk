@@ -75,10 +75,16 @@ COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
 BOARD_LEGACY_NL80211_STA_EVENTS := true
 
 # Wifi related defines
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_WLAN_DEVICE                := qcwcn
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/prima_wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "prima_wlan"
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
+BLUETOOTH_HCI_USE_MCT := true
 
 # NFC
 BOARD_HAVE_NFC := true

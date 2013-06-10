@@ -260,6 +260,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/gogh-common/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
     device/samsung/gogh-common/keychars/Virtual.kcm:system/usr/keychars/Virtual.kcm
 
+# Modules
+PRODUCT_COPY_FILES += \
+    device/samsung/gogh-common/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
+    device/samsung/gogh-common/modules/prima_wlan.ko:system/lib/modules/prima_wlan.ko \
+
 # IDC
 PRODUCT_COPY_FILES += \
     device/samsung/gogh-common/idc/qwerty.idc:system/usr/idc/qwerty.idc \
