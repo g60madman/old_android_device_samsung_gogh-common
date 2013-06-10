@@ -22,8 +22,6 @@ lib/libaudioalsa.so
 lib/libmmparser.so
 lib/libmmosal.so
 lib/libdivxdrm.so
-lib/libwvm.so
-lib/libWVStreamControlAPI_L3.so
 
 # Graphics
 lib/libmm-color-convertor.so

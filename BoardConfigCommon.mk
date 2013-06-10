@@ -51,6 +51,8 @@ TARGET_FORCE_CPU_UPLOAD := true
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
+TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 
 # Krait optimizations
@@ -103,6 +105,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/
 # Camera
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 BOARD_CAMERA_USE_MM_HEAP := true
+BOARD_NEEDS_MEMORYHEAPPMEM := true
 
 # Workaround to avoid issues with legacy liblights on QCOM platforms
 TARGET_PROVIDES_LIBLIGHTS := true
@@ -110,9 +113,7 @@ TARGET_PROVIDES_LIBLIGHTS := true
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 BOARD_HAVE_SAMSUNG_AUDIO := true
-
-# Workaround for missing symbols in camera
-BOARD_NEEDS_MEMORYHEAPPMEM := true
+BOARD_HAVE_AUDIENCE_A2220 := true
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
@@ -134,15 +135,4 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
-
-# HAX
-#BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
-#BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
-#TARGET_PROVIDES_LIBAUDIO := true
-
-# Use Audience A2220 chip
-BOARD_HAVE_AUDIENCE_A2220 := true
-
-# Use USB Dock Audio
-#BOARD_HAVE_DOCK_USBAUDIO := true
 

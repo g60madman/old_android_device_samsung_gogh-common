@@ -119,6 +119,14 @@ PRODUCT_PACKAGES += \
     libtilerenderer \
     libI420colorconvert
 
+# Victory Kernel Settings
+PRODUCT_PACKAGES += \
+    libexifa \
+    libjpega \
+    libkeyutils \
+    qcom_audio_dut \
+    qcom_dut
+
 # Omx
 PRODUCT_PACKAGES += \
     libdivxdrmdecrypt \
