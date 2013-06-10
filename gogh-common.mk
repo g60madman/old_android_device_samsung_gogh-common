@@ -52,7 +52,12 @@ PRODUCT_COPY_FILES += \
 
 # Media config
 PRODUCT_COPY_FILES += \
-    device/samsung/gogh-common/configs/media_profiles.xml:system/etc/media_profiles.xml
+    device/samsung/gogh-common/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	device/samsung/gogh-common/configs/media_codecs.xml:system/etc/media_codecs.xml
+
+# EGL config
+PRODUCT_COPY_FILES += \
+    device/samsung/gogh-common/configs/egl.cfg:system/lib/egl/egl.cfg
 
 # Device uses high-density artwork where available
 PRODUCT_LOCALES := en_US
@@ -105,6 +110,50 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     power.msm8960
 
+# QCOM Display
+PRODUCT_PACKAGES += \
+    libgenlock \
+    libmemalloc \
+    liboverlay \
+    libqdutils \
+    libtilerenderer \
+    libI420colorconvert
+
+# Omx
+PRODUCT_PACKAGES += \
+    libdivxdrmdecrypt \
+    libmm-omxcore \
+    libOmxCore \
+    libstagefrighthw \
+    libOmxVdec \
+    libOmxVenc \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.composition.type=dyn \
+    debug.mdpcomp.maxlayer=3 \
+    debug.mdpcomp.logs=0
+
+# Init scripts
+PRODUCT_PACKAGES += \
+    init.qcom.post_boot.sh \
+    init.qcom.efs.sync.sh \
+    init.qcom.sh \
+    init.qcom.class_core.sh \
+    init.qcom.class_main.sh \
+    init.qcom.syspart_fixup.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.mdm_links.sh \
+    init.qcom.modem_links.sh \
+    init.qcom.usb.sh \
+    lpm.rc \
+    init.qcom.lpm_boot.sh
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
@@ -150,6 +199,12 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    make_ext4fs \
+    e2fsck \
+    setup_fs
+
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
@@ -160,6 +215,12 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     VisualizationWallpapers \
     librs_jni
+
+# for bugmailer
+PRODUCT_PACKAGES += send_bug
+PRODUCT_COPY_FILES += \
+    system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
+    system/extras/bugmailer/send_bug:system/bin/send_bug
 
 # keylayouts
 PRODUCT_COPY_FILES += \
@@ -242,11 +303,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     ro.telephony.ril.v3=skipnullaid
 
+# Charger
+PRODUCT_PACKAGES += charger charger_res_images
+
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+
 # Common overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/gogh-common/overlay
-
-# common msm8960
-$(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
