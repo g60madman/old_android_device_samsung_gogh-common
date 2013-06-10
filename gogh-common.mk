@@ -20,10 +20,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US_SUPL:system/etc/gps.conf
 
 ## (2) Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/d2-common/d2-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/gogh-common/gogh-common-vendor.mk)
 
 ## overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/gogh-common/overlay
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
@@ -35,8 +35,29 @@ TARGET_SCREEN_WIDTH := 720
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-	device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
-	device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf
+    device/samsung/gogh-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
+    device/samsung/gogh-common/audio/audio_policy.conf:system/etc/audio_policy.conf
+
+# Qualcomm Adreno 2xx User-mode Android 4.1 Jelly Bean Graphics Driver (ARMv7) (early sample)
+PRODUCT_COPY_FILES += \
+    device/samsung/gogh-common/system/etc/firmware/a225p5_pm4.fw:system/etc/firmware/a225p5_pm4.fw \
+    device/samsung/gogh-common/system/etc/firmware/a225_pfp.fw:system/etc/firmware/a225_pfp.fw \
+    device/samsung/gogh-common/system/etc/firmware/a225_pm4.fw:system/etc/firmware/a225_pm4.fw \
+    device/samsung/gogh-common/system/etc/firmware/leia_pfp_470.fw:system/etc/firmware/leia_pfp_470.fw \
+    device/samsung/gogh-common/system/etc/firmware/leia_pm4_470.fw:system/etc/firmware/leia_pm4_470.fw \
+    device/samsung/gogh-common/system/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
+    device/samsung/gogh-common/system/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
+    device/samsung/gogh-common/system/lib/egl/eglsubAndroid.so:system/lib/egl/eglsubAndroid.so \
+    device/samsung/gogh-common/system/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libGLESv2S3D_adreno200.so:system/lib/egl/libGLESv2S3D_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
+    device/samsung/gogh-common/system/lib/libc2d2_z180.so:system/lib/libc2d2_z180.so \
+    device/samsung/gogh-common/system/lib/libC2D2.so:system/lib/libC2D2.so \
+    device/samsung/gogh-common/system/lib/libgsl.so:system/lib/libgsl.so \
+    device/samsung/gogh-common/system/lib/libOpenVG.so:system/lib/libOpenVG.so \
+    device/samsung/gogh-common/system/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so
 
 # Ramdisk
 PRODUCT_PACKAGES += \
@@ -53,7 +74,7 @@ PRODUCT_PACKAGES += Torch
 
 # Vold configuration
 PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
+    device/samsung/gogh-common/vold.fstab:system/etc/vold.fstab
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

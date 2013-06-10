@@ -29,7 +29,7 @@ USE_CAMERA_STUB := true
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
 # Kernel
-TARGET_KERNEL_SOURCE        := kernel/samsung/d2
+TARGET_KERNEL_SOURCE        := kernel/samsung/goghvmu
 BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
 BOARD_KERNEL_BASE           := 0x80200000
 BOARD_FORCE_RAMDISK_ADDRESS := 0x81500000
@@ -42,13 +42,13 @@ COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
 BOARD_LEGACY_NL80211_STA_EVENTS := true
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2-common/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/gogh-common/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/samsung/d2-common/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/gogh-common/recovery.fstab
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
