@@ -28,7 +28,8 @@ LOCAL_SRC_FILES += \
 
 LOCAL_CFLAGS += \
      -fno-short-enums \
-     -D_ANDROID_
+     -D_ANDROID_ \
+	 -DNEW_QC_GPS
 
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils
@@ -66,8 +67,7 @@ LOCAL_SRC_FILES += \
     loc_eng_agps.cpp \
     loc_eng_xtra.cpp \
     loc_eng_ni.cpp \
-    loc_eng_log.cpp \
-    loc_eng_nmea.cpp
+    loc_eng_log.cpp
 
 ifeq ($(FEATURE_GNSS_BIT_API), true)
 LOCAL_CFLAGS += -DFEATURE_GNSS_BIT_API
@@ -82,11 +82,12 @@ LOCAL_SRC_FILES += \
 
 LOCAL_CFLAGS += \
      -fno-short-enums \
-     -D_ANDROID_
+     -D_ANDROID_ \
+	 -DNEW_QC_GPS
 
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
-    device/samsung/d2-common/gps/ulp/inc
+    device/samsung/msm8960-common/gps/ulp/inc
 
 LOCAL_PRELINK_MODULE := false
 
@@ -114,11 +115,12 @@ LOCAL_SRC_FILES += \
 LOCAL_CFLAGS += \
     -fno-short-enums \
     -D_ANDROID_ \
+	-DNEW_QC_GPS
 
 ## Includes
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
-    device/samsung/d2-common/gps/ulp/inc
+    device/samsung/msm8960-common/gps/ulp/inc
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
