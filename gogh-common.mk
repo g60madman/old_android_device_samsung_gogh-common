@@ -17,38 +17,60 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 ## (2) Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/d2-common/d2-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/gogh-common/gogh-common-vendor.mk)
 
 ## overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/gogh-common/overlay
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 1280
-TARGET_SCREEN_WIDTH := 720
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-        device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
-        device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
-        device/samsung/d2-common/audio/audio_effects.conf:system/etc/audio_effects.conf
+        device/samsung/gogh-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
+        device/samsung/gogh-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
+        device/samsung/gogh-common/audio/audio_effects.conf:system/etc/audio_effects.conf
+
+# Qualcomm Adreno taken from Nexus 4
+PRODUCT_COPY_FILES += \
+    device/samsung/gogh-common/system/etc/firmware/a225p5_pm4.fw:system/etc/firmware/a225p5_pm4.fw \
+    device/samsung/gogh-common/system/etc/firmware/a225_pfp.fw:system/etc/firmware/a225_pfp.fw \
+    device/samsung/gogh-common/system/etc/firmware/a225_pm4.fw:system/etc/firmware/a225_pm4.fw \
+    device/samsung/gogh-common/system/etc/firmware/leia_pfp_470.fw:system/etc/firmware/leia_pfp_470.fw \
+    device/samsung/gogh-common/system/etc/firmware/leia_pm4_470.fw:system/etc/firmware/leia_pm4_470.fw \
+    device/samsung/gogh-common/system/etc/firmware/vidc_1080p.fw:system/etc/firmware/vidc_1080p.fw \
+    device/samsung/gogh-common/system/lib/egl/eglsubAndroid.so:system/lib/egl/eglsubAndroid.so \
+    device/samsung/gogh-common/system/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libGLESv2S3D_adreno200.so:system/lib/egl/libGLESv2S3D_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libplayback_adreno200.so:system/lib/egl/libplayback_adreno200.so \
+    device/samsung/gogh-common/system/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
+    device/samsung/gogh-common/system/lib/libc2d2_z180.so:system/lib/libc2d2_z180.so \
+    device/samsung/gogh-common/system/lib/libC2D2.so:system/lib/libC2D2.so \
+    device/samsung/gogh-common/system/lib/libgsl.so:system/lib/libgsl.so \
+    device/samsung/gogh-common/system/lib/libOpenCL.so:system/lib/libOpenCL.so \
+    device/samsung/gogh-common/system/lib/libOpenVG.so:system/lib/libOpenVG.so \
+    device/samsung/gogh-common/system/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so
 
 # Keymaps
 PRODUCT_COPY_FILES += \
-       device/samsung/d2-common/keylayout/fsa9485.kl:system/usr/keylayout/fsa9485.kl \
-       device/samsung/d2-common/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
-       device/samsung/d2-common/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
-       device/samsung/d2-common/keylayout/sec_keys.kl:system/usr/keylayout/sec_keys.kl \
-       device/samsung/d2-common/keylayout/sec_powerkey.kl:system/usr/keylayout/sec_powerkey.kl \
-       device/samsung/d2-common/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
-       device/samsung/d2-common/keylayout/sii9234_rcp.kl:system/usr/keylayout/sii9234_rcp.kl
+       device/samsung/gogh-common/keylayout/fsa9485.kl:system/usr/keylayout/fsa9485.kl \
+       device/samsung/gogh-common/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
+       device/samsung/gogh-common/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
+       device/samsung/gogh-common/keylayout/sec_keys.kl:system/usr/keylayout/sec_keys.kl \
+       device/samsung/gogh-common/keylayout/sec_powerkey.kl:system/usr/keylayout/sec_powerkey.kl \
+       device/samsung/gogh-common/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
+       device/samsung/gogh-common/keylayout/sii9234_rcp.kl:system/usr/keylayout/sii9234_rcp.kl
 
 # Media profile
 PRODUCT_COPY_FILES += \
-       device/samsung/d2-common/media/media_profiles.xml:system/etc/media_profiles.xml
+       device/samsung/gogh-common/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # Ramdisk
 PRODUCT_PACKAGES += \
@@ -65,14 +87,14 @@ PRODUCT_PACKAGES += \
     gps.msm8960
 
 PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/gps/gps.conf:system/etc/gps.conf
+    device/samsung/gogh-common/gps/gps.conf:system/etc/gps.conf
 
 # Torch
 PRODUCT_PACKAGES += Torch
 
 # Vold configuration
 PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
+    device/samsung/gogh-common/vold.fstab:system/etc/vold.fstab
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -145,9 +167,9 @@ PRODUCT_PACKAGES += \
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/samsung/d2-common/nfc/nfcee_access.xml
+    NFCEE_ACCESS_PATH := device/samsung/gogh-common/nfc/nfcee_access.xml
 else
-    NFCEE_ACCESS_PATH := device/samsung/d2-common/nfc/nfcee_access_debug.xml
+    NFCEE_ACCESS_PATH := device/samsung/gogh-common/nfc/nfcee_access_debug.xml
 endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
