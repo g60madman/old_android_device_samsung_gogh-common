@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2009-2011, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2012, Code Aurora Forum. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,18 +26,63 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-echo 1 > /sys/module/rpm_resources/enable_low_power/L2_cache
-echo 1 > /sys/module/rpm_resources/enable_low_power/pxo
-echo 2 > /sys/module/rpm_resources/enable_low_power/vdd_dig
-echo 2 > /sys/module/rpm_resources/enable_low_power/vdd_mem
-echo 1 > /sys/module/rpm_resources/enable_low_power/rpm_cpu
-echo 1 > /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled
-echo 1 > /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled
-echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo "powersave" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+LOG_TAG="qcom-bluetooth"
+LOG_NAME="${0}:"
+
+hciattach_pid=""
+
+loge ()
+{
+  /system/bin/log -t $LOG_TAG -p e "$LOG_NAME $@"
+}
+
+logi ()
+{
+  /system/bin/log -t $LOG_TAG -p i "$LOG_NAME $@"
+}
+
+failed ()
+{
+  loge "$1: exit code $2"
+  exit $2
+}
+
+start_hciattach ()
+{
+  /system/bin/hciattach -n /dev/ttyHS2 ath3k 3000000 &
+  hciattach_pid=$!
+  logi "start_hciattach: pid = $hciattach_pid"
+}
+
+kill_hciattach ()
+{
+  logi "kill_hciattach: pid = $hciattach_pid"
+  ## careful not to kill zero or null!
+  kill -TERM $hciattach_pid
+  # this shell doesn't exit now -- wait returns for normal exit
+}
+
+# mimic hciattach options parsing -- maybe a waste of effort
+USAGE="hciattach [-n] [-p] [-b] [-t timeout] [-s initial_speed] <tty> <type | id> [speed] [flow|noflow] [bdaddr]"
+
+while getopts "blnpt:s:" f
+do
+  case $f in
+  b | l | n | p)  opt_flags="$opt_flags -$f" ;;
+  t)      timeout=$OPTARG;;
+  s)      initial_speed=$OPTARG;;
+  \?)     echo $USAGE; exit 1;;
+  esac
+done
+shift $(($OPTIND-1))
+
+# init does SIGTERM on ctl.stop for service
+trap "kill_hciattach" TERM INT
+
+logi "start hciattach"
+start_hciattach
+
+wait $hciattach_pid
+logi "Bluetooth stopped"
+
+exit 0

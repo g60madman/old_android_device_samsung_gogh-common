@@ -2,11 +2,19 @@
 bin/bridgemgrd
 bin/btnvtool
 bin/ds_fmc_appd
+bin/gsiff_daemon
+bin/hci_qcomm_init
+bin/hciattach
 bin/immvibed
+bin/LE_dut
 bin/mpdecision
 bin/port-bridge
+bin/secstarter
+bin/qcom_dut
+bin/qcom_audio_dut
 bin/usbhub
 bin/usbhub_init
+bin/vpnclientpm
 
 # Thermal
 bin/thermald
@@ -112,11 +120,19 @@ etc/firmware/wcnss.b00
 etc/firmware/wcnss.b01
 etc/firmware/wcnss.b02
 etc/firmware/wcnss.b04
+etc/firmware/wcnss.b05
 etc/firmware/wcnss.mdt
 etc/wifi/wpa_supplicant.conf
 
 # Firmware
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
 etc/firmware/vidc_1080p.fw
+
+# Modules
+lib/modules/vpnclient.ko
+lib/modules/prima/cfg80211.ko
+lib/modules/prima/prima_wlan.ko
 
 # Perf
 lib/libqc-opt.so

@@ -95,6 +95,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/gogh-common/system/lib/libOpenVG.so:system/lib/libOpenVG.so \
     device/samsung/gogh-common/system/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so
 
+# Wifi Firmware
+PRODUCT_COPY_FILES += \
+    device/samsung/gogh-common/system/etc/firmware/wcd9310/wcd9310_anc.bin:system/etc/firmware/wcd9310/wcd9310_anc.bin \
+    device/samsung/gogh-common/system/etc/firmware/wcd9310/wcd9310_mbhc.bin:system/etc/firmware/wcd9310/wcd9310_mbhc.bin
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
@@ -260,11 +265,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/gogh-common/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
     device/samsung/gogh-common/keychars/Virtual.kcm:system/usr/keychars/Virtual.kcm
 
-# Modules
-PRODUCT_COPY_FILES += \
-    device/samsung/gogh-common/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
-    device/samsung/gogh-common/modules/prima_wlan.ko:system/lib/modules/prima_wlan.ko \
-
 # IDC
 PRODUCT_COPY_FILES += \
     device/samsung/gogh-common/idc/qwerty.idc:system/usr/idc/qwerty.idc \
@@ -274,6 +274,40 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
 	$(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/system/bin/postrecoveryboot.sh
+
+#scripts
+PRODUCT_COPY_FILES += \
+	device/samsung/gogh-common/scripts/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
+	device/samsung/gogh-common/scripts/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+	device/samsung/gogh-common/scripts/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
+	device/samsung/gogh-common/scripts/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
+	device/samsung/gogh-common/scripts/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+	device/samsung/gogh-common/scripts/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh \
+	device/samsung/gogh-common/scripts/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
+	device/samsung/gogh-common/scripts/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+	device/samsung/gogh-common/scripts/init.qcom.post_fs.sh:system/etc/init.qcom.post_fs.sh \
+	device/samsung/gogh-common/scripts/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
+	device/samsung/gogh-common/scripts/init.qcom.thermald_conf.sh:system/etc/init.qcom.thermald_conf.sh \
+	device/samsung/gogh-common/scripts/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
+
+#init
+PRODUCT_COPY_FILES += \
+	device/samsung/gogh-common/root/fstab.qcom:root/fstab.qcom \
+	device/samsung/gogh-common/root/init:root/init \
+	device/samsung/gogh-common/root/init.bt.rc:root/init.bt.rc \
+	device/samsung/gogh-common/root/init.bt.rc:root/init.carrier.rc \
+	device/samsung/gogh-common/root/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+	device/samsung/gogh-common/root/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+	device/samsung/gogh-common/root/init.qcom.rc:root/init.qcom.rc \
+	device/samsung/gogh-common/root/init.qcom.sh:root/init.qcom.sh \
+	device/samsung/gogh-common/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
+	device/samsung/gogh-common/root/init.qcom.usb.sh:root/init.qcom.usb.sh \
+	device/samsung/gogh-common/root/init.rc:root/init.rc \
+	device/samsung/gogh-common/root/init.target.rc:root/init.target.rc \
+	device/samsung/gogh-common/root/initlogo.rle:root/initlogo.rle \
+	device/samsung/gogh-common/root/MSM8960_lpm.rc:root/MSM8960_lpm.rc \
+	device/samsung/gogh-common/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
+	device/samsung/gogh-common/root/ueventd.rc:root/ueventd.rc
 
 # Increase the HWUI font cache since we have tons of RAM
 PRODUCT_PROPERTY_OVERRIDES += \

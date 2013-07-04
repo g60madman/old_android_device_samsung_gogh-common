@@ -38,7 +38,7 @@ cd /firmware/image
 # Get the list of files in /firmware/image
 # for which sym links have to be created
 
-fwfiles=`ls modem* q6* wcnss* dsps* tzapps* gss*`
+fwfiles=`ls modem* q6* wcnss* dsps* tzapps* gss* sshdcpap* vidc*`
 modem_fwfiles=`ls modem_fw.mdt`
 
 # Check if the links with similar names
@@ -47,6 +47,9 @@ modem_fwfiles=`ls modem_fw.mdt`
 cd /system/etc/firmware
 linksNeeded=0
 fixModemFirmware=0
+
+# Remove files not used anymore.
+rm /system/etc/firmware/dxhdcp2*
 
 # For everyfile in fwfiles check if
 # the corresponding file exists
@@ -170,6 +173,30 @@ case $linksNeeded in
             break;;
          *)
             log -p w -t No gss image found;;
+      esac
+
+      case `ls sshdcpap.mdt 2>/dev/null` in
+         sshdcpap.mdt)
+            ln -s /firmware/image/sshdcpap.mdt /system/etc/firmware/sshdcpapp.mdt 2>/dev/null
+            ln -s /firmware/image/sshdcpap.b00 /system/etc/firmware/sshdcpapp.b00 2>/dev/null
+            ln -s /firmware/image/sshdcpap.b01 /system/etc/firmware/sshdcpapp.b01 2>/dev/null
+            ln -s /firmware/image/sshdcpap.b02 /system/etc/firmware/sshdcpapp.b02 2>/dev/null
+            ln -s /firmware/image/sshdcpap.b03 /system/etc/firmware/sshdcpapp.b03 2>/dev/null
+            break;;
+         *)
+            log -p w -t PIL 8960 device but no sshdcpapp image found;;
+      esac
+
+      case `ls vidc.mdt 2>/dev/null` in
+         vidc.mdt)
+            ln -s /firmware/image/vidc.mdt /system/etc/firmware/vidc.mdt 2>/dev/null
+            ln -s /firmware/image/vidc.b00 /system/etc/firmware/vidc.b00 2>/dev/null
+            ln -s /firmware/image/vidc.b01 /system/etc/firmware/vidc.b01 2>/dev/null
+            ln -s /firmware/image/vidc.b02 /system/etc/firmware/vidc.b02 2>/dev/null
+            ln -s /firmware/image/vidc.b03 /system/etc/firmware/vidc.b03 2>/dev/null
+            break;;
+         *)
+            log -p w -t PIL 8960 device but no vidc image found;;
       esac
       break;;
 

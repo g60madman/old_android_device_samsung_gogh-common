@@ -83,13 +83,17 @@ esac
 #
 # Allow USB enumeration with default PID/VID
 #
+setprop sys.usb.config.extra diag
 baseband=`getprop ro.baseband`
 echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
 usb_config=`getprop persist.sys.usb.config`
 case "$usb_config" in
     "" | "adb") #USB persist config not set, select default configuration
         case $target in
-            "msm8960" | "msm8974")
+            "msm8974")
+                setprop persist.sys.usb.config diag,adb
+                ;;
+            "msm8960")
                 case "$baseband" in
                     "mdm")
                          setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
@@ -98,7 +102,7 @@ case "$usb_config" in
                          setprop persist.sys.usb.config diag,diag_mdm,serial_smd,serial_tty,serial_hsuart,rmnet_hsuart,mass_storage,adb
                     ;;
                     *)
-                         setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_bam,mass_storage,adb
+                         setprop persist.sys.usb.config mtp,adb
                     ;;
                 esac
             ;;
@@ -130,7 +134,7 @@ target=`getprop ro.product.device`
 cdromname="/system/etc/cdrom_install.iso"
 cdromenable=`getprop persist.service.cdrom.enable`
 case "$target" in
-        "msm7627a")
+        "msm7627a" | "msm8625")
                 case "$cdromenable" in
                         0)
                                 echo "" > /sys/class/android_usb/android0/f_mass_storage/lun0/file

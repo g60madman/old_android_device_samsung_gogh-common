@@ -79,7 +79,7 @@ WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_WLAN_DEVICE                := qcwcn
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/prima_wlan.ko"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/prima/prima_wlan.ko"
 WIFI_DRIVER_MODULE_NAME          := "prima_wlan"
 
 # Bluetooth
