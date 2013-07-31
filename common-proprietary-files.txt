@@ -2,7 +2,6 @@
 bin/bridgemgrd
 bin/btnvtool
 bin/ds_fmc_appd
-bin/gsiff_daemon
 bin/hci_qcomm_init
 bin/hciattach
 bin/immvibed
