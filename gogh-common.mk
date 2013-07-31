@@ -204,13 +204,8 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras
 
 # NFCEE access control
-ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/samsung/gogh-common/configs/nfcee_access.xml
-else
-    NFCEE_ACCESS_PATH := device/samsung/gogh-common/configs/nfcee_access_debug.xml
-endif
 PRODUCT_COPY_FILES += \
-    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
+    device/samsung/gogh-common/configs/nfcee_access.xml:system/etc/nfcee_access.xml
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
